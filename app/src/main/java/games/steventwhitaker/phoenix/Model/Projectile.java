@@ -58,7 +58,6 @@ public class Projectile extends GameObject
     @Override
     public void update(double timeElapsed)
     {
-        // TODO: Make Projectile move in mDirection
         PointF newPos = new PointF();
         newPos.x = (float) (getPos().x + getType().getSpeed() * timeElapsed * Math.sin(mDirection));
         newPos.y = (float) (getPos().y - getType().getSpeed() * timeElapsed * Math.cos(mDirection));

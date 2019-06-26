@@ -63,7 +63,7 @@ public class GameObjectType
 
     public static boolean isProjectile(Types type)
     {
-        return type == Types.PROJECTILE_VOMIT;
+        return type == Types.PROJECTILE_VOMIT; // TODO: Fill out other projectile types
     }
 
     public String getImageFilePath()

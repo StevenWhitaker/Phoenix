@@ -25,13 +25,13 @@ public class StartFragment extends Fragment
     }
 
     // TODO: In database, have field to indicate whether the save was in the shop menu, at the
-    // beginning of a level, or in the middle of a level
+    //  beginning of a level, or in the middle of a level
     // TODO: Have database save automatically when GameFragment ends
     // TODO: Have database save automatically when ShopFragment ends (pressing save and quit will
-    // just end the ShopFragment)
+    //  just end the ShopFragment)
     // TODO: Have database clear itself when HighScoresFragment ends
     // TODO: Go to HighScoresFragment after death or beating the final level (this way the
-    // database will be cleared to prevent continuing when the player died)
+    //  database will be cleared to prevent continuing when the player died)
     // TODO: Clearing database will just set GameData.sSaveState to "none"
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

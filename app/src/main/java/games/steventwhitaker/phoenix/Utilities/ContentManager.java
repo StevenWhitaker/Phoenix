@@ -26,6 +26,7 @@ public class ContentManager
 
     private static AssetManager sAssets;
     private static Map<String, Bitmap> sImages;
+    // TODO: Load sounds
 
     /**
      * Set the AssetManager for the app.

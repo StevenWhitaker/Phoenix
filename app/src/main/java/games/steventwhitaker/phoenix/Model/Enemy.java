@@ -44,7 +44,6 @@ public class Enemy extends Fighter
     public void update(double timeElapsed)
     {
         super.update(timeElapsed);
-        // TODO: Make Enemy randomly shoot
         PointF newPos = new PointF();
         switch(mDirection)
         {
