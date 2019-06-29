@@ -23,6 +23,7 @@ public class ContentManager
     private static final String ENEMY_FOLDER = "enemy";
     private static final String PLAYER_FOLDER = "player";
     private static final String PROJECTILE_FOLDER = "projectile";
+    private static final String MONEY_FILENAME = "money.png";
 
     private static AssetManager sAssets;
     private static Map<String, Bitmap> sImages;
@@ -72,6 +73,9 @@ public class ContentManager
                 images.put(filepath, bitmap);
                 Log.i(TAG, "Loaded " + filepath);
             }
+            String filepath = IMAGES_FOLDER + "/" + MONEY_FILENAME;
+            Bitmap bitmap = BitmapFactory.decodeStream(sAssets.open(filepath));
+            images.put(filepath, bitmap);
             sImages = images;
         }
         catch(IOException ioe)

@@ -63,7 +63,6 @@ public class GameView extends View
                 action = "ACTION_CANCEL";
                 break;
         }
-        Log.i(TAG, action + " at x = " + event.getX() + ", y = " + event.getY());
         return true;
     }
 

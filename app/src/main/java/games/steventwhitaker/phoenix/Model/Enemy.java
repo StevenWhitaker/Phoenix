@@ -15,6 +15,7 @@ public class Enemy extends Fighter
 {
     private static final String TAG = "Enemy";
 
+    /** Specifies the direction in which the Enemy moves on the screen */
     public enum Direction
     {
         LEFT,

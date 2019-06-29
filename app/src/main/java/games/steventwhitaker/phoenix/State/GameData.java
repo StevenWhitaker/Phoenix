@@ -12,6 +12,7 @@ import java.util.Map;
 
 import games.steventwhitaker.phoenix.Model.Enemy;
 import games.steventwhitaker.phoenix.Model.GameObjectType;
+import games.steventwhitaker.phoenix.Model.Money;
 import games.steventwhitaker.phoenix.Model.Player;
 import games.steventwhitaker.phoenix.Model.Projectile;
 import games.steventwhitaker.phoenix.Model.ProjectileType;
@@ -27,13 +28,16 @@ public class GameData
     private static final String TAG = "GameData";
 
     public static int sLevel;
+    // sSaveState is a String and not an Enum because Strings can be written to database
     public static String sSaveState; // TODO: none, shop, game; save and quit will have shop state
     public static Map<GameObjectType.Types, GameObjectType> sGameObjectTypes;
     public static Player sPlayer;
     public static int sPlayerHealth;
+    public static int sPlayerMoney;
     public static boolean sRapidFire;
     public static List<Enemy> sEnemies;
     public static List<Projectile> sProjectiles;
+    public static List<Money> sMoneys;
 
     public static void initialize()
     {
@@ -41,9 +45,11 @@ public class GameData
         sLevel = 0;
         sSaveState = "none";
         sPlayerHealth = Player.MAX_HEALTH;
+        sPlayerMoney = 0;
         sRapidFire = false;
         sEnemies = new ArrayList<>();
         sProjectiles = new ArrayList<>();
+        sMoneys = new ArrayList<>();
 
         // Create all GameObjectTypes
         sGameObjectTypes = new HashMap<>();
@@ -137,7 +143,12 @@ public class GameData
                 i--;
             }
         }
+        for(Money m : sMoneys)
+        {
+            m.update(timeElapsed);
+        }
         checkCollisions();
+        collectMoney();
     }
 
     private static void checkCollisions()
@@ -155,6 +166,12 @@ public class GameData
                         e.loseHealth(p.getType().getPower());
                         if(e.getHealth() <= 0)
                         {
+                            if(Math.random() > 0.0) // TODO: Change to make money drop more randomly
+                            {
+                                Money m = new Money(sGameObjectTypes.get(GameObjectType.Types.MONEY));
+                                m.setPos(e.getPos());
+                                sMoneys.add(m);
+                            }
                             sEnemies.remove(j);
                         }
                         sProjectiles.remove(i);
@@ -180,6 +197,21 @@ public class GameData
         }
     }
 
+    private static void collectMoney()
+    {
+        for(int i = 0; i < sMoneys.size(); i++)
+        {
+            Money m = sMoneys.get(i);
+            if(RectF.intersects(sPlayer.getBounds(), m.getBounds()))
+            {
+                sPlayerMoney += m.getValue();
+                sMoneys.remove(i);
+                i--;
+                Log.d(TAG, "sPlayerMoney = " + sPlayerMoney);
+            }
+        }
+    }
+
     public static void draw(Canvas canvas)
     {
         sPlayer.draw(canvas);
@@ -190,6 +222,10 @@ public class GameData
         for(Projectile p : sProjectiles)
         {
             p.draw(canvas);
+        }
+        for(Money m : sMoneys)
+        {
+            m.draw(canvas);
         }
     }
 }

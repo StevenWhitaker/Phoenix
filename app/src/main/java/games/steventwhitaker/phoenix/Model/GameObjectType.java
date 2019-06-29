@@ -17,7 +17,8 @@ public class GameObjectType
         PLAYER_RED,
         ENEMY_GRUNT,
         ENEMY_BOSS1,
-        PROJECTILE_VOMIT
+        PROJECTILE_VOMIT,
+        MONEY
     }
 
     /** The file path for the image */
@@ -29,7 +30,7 @@ public class GameObjectType
     /** The speed of the GameObjectType */
     private int mSpeed;
     /** The starting health of the GameObjectType; unfortunately, this is not used for
-     * ProjectileTypes */
+     * ProjectileTypes or Money */
     private int mStartingHealth;
 
     /**
@@ -54,6 +55,13 @@ public class GameObjectType
                 mWidth = 5;
                 mHeight = 15;
                 mSpeed = 300;
+                mStartingHealth = -1;
+                break;
+            case MONEY:
+                mImageFilePath = "images/money.png";
+                mWidth = 30;
+                mHeight = 30;
+                mSpeed = 100;
                 mStartingHealth = -1;
                 break;
             default: // This should never happen
